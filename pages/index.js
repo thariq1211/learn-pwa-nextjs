@@ -1,14 +1,66 @@
-import Head from 'next/head'
+import Link from "next/link";
+import Head from "next/head";
 
 export default function Home() {
+  const links = [
+    { href: "https://github.com/thariq1211", label: "My GitHub" },
+    { href: "http://thariqnugroho.epizy.com/", label: "My HomePage" },
+  ].map((link) => ({
+    ...link,
+    key: `nav-link-${link.href}-${link.label}`,
+  }));
+
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+        />
+        <meta name="description" content="Description" />
+        <meta name="keywords" content="Keywords" />
+        <title>Next.js PWA Example</title>
+
+        <link rel="manifest" href="/manifest.json" />
+        <link
+          href="/favicon-16x16.png"
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+        />
+        <link
+          href="/favicon-32x32.png"
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          href="/favicon-96x96.png"
+          rel="icon"
+          type="image/png"
+          sizes="96x96"
+        />
+        <link rel="apple-touch-icon" href="/apple-icon.png"></link>
+        <meta name="theme-color" content="#317EFB" />
       </Head>
 
       <main>
+        <nav>
+          <ul>
+            <li>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
+            </li>
+            {links.map(({ key, href, label }) => (
+              <li key={key}>
+                <a href={href}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -198,7 +250,27 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
+
+        nav {
+          text-align: center;
+        }
+        ul {
+          display: flex;
+          justify-content: space-between;
+        }
+        nav > ul {
+          padding: 4px 16px;
+        }
+        li {
+          display: flex;
+          padding: 6px 8px;
+        }
+        a {
+          color: #067df7;
+          text-decoration: none;
+          font-size: 13px;
+        }
       `}</style>
     </div>
-  )
+  );
 }
